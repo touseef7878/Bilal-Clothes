@@ -102,11 +102,11 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="container-narrow py-8 animate-fade-in">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="font-display text-3xl font-bold">My Account</h1>
-          <p className="text-muted-foreground">{user?.email}</p>
+    <div className="container-narrow py-6 sm:py-8 animate-fade-in">
+      <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <h1 className="page-heading">My Account</h1>
+          <p className="truncate text-sm text-muted-foreground sm:text-base">{user?.email}</p>
         </div>
         <Button variant="outline" onClick={handleSignOut}>
           <LogOut className="h-4 w-4 mr-2" /> Sign Out
@@ -114,7 +114,7 @@ export default function AccountPage() {
       </div>
 
       <Tabs defaultValue={initialTab}>
-        <TabsList className="w-full justify-start mb-6 overflow-x-auto">
+        <TabsList className="scrollbar-hide mb-6 w-full justify-start overflow-x-auto">
           <TabsTrigger value="orders"><Package className="h-4 w-4 mr-2" /> Orders</TabsTrigger>
           <TabsTrigger value="addresses"><MapPin className="h-4 w-4 mr-2" /> Addresses</TabsTrigger>
           <TabsTrigger value="wishlist"><Heart className="h-4 w-4 mr-2" /> Wishlist</TabsTrigger>
@@ -130,8 +130,8 @@ export default function AccountPage() {
           ) : (
             <div className="space-y-4">
               {orders.map((order) => (
-                <div key={order.id} className="border rounded-lg p-5">
-                  <div className="flex items-center justify-between mb-3">
+                <div key={order.id} className="rounded-lg border p-4 sm:p-5">
+                  <div className="mb-3 flex items-start justify-between gap-3">
                     <div>
                       <p className="font-mono text-sm font-medium">#{order.id.slice(0, 8)}</p>
                       <p className="text-xs text-muted-foreground">{new Date(order.created_at).toLocaleDateString('en-PK', { dateStyle: 'medium' })}</p>
@@ -140,7 +140,7 @@ export default function AccountPage() {
                       {order.status.replace(/_/g, ' ')}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">{order.payment_method === 'cod' ? 'Cash on Delivery' : order.payment_method}</p>
                       <p className="font-semibold">{formatPKR(order.total)}</p>
@@ -158,15 +158,15 @@ export default function AccountPage() {
         <TabsContent value="addresses">
           <div className="space-y-4">
             {addresses.map((addr) => (
-              <div key={addr.id} className="border rounded-lg p-5 flex justify-between">
-                <div>
+              <div key={addr.id} className="flex justify-between gap-3 rounded-lg border p-4 sm:p-5">
+                <div className="min-w-0">
                   <p className="font-medium">{addr.label}</p>
                   <p className="text-sm text-muted-foreground">{addr.recipient_name}</p>
                   <p className="text-sm text-muted-foreground">{addr.phone}</p>
                   <p className="text-sm text-muted-foreground">{addr.address_line}, {addr.city}, {addr.province}</p>
                   {addr.area && <p className="text-sm text-muted-foreground">Landmark: {addr.area}</p>}
                 </div>
-                <button onClick={() => handleDeleteAddress(addr.id)} className="text-muted-foreground hover:text-destructive">
+                <button onClick={() => handleDeleteAddress(addr.id)} className="flex h-10 w-10 shrink-0 items-center justify-center text-muted-foreground hover:text-destructive">
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
@@ -213,7 +213,7 @@ export default function AccountPage() {
                   <Label>Area / Landmark</Label>
                   <Input value={newAddr.area} onChange={(e) => setNewAddr({ ...newAddr, area: e.target.value })} placeholder="Near..." />
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Button onClick={handleAddAddress}>Save Address</Button>
                   <Button variant="outline" onClick={() => setShowAddressForm(false)}>Cancel</Button>
                 </div>
@@ -234,13 +234,13 @@ export default function AccountPage() {
               <Link href="/women"><Button>Discover Products</Button></Link>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
               {wishlist.map((product) => (
                 <div key={product.id} className="relative group">
                   <ProductCard product={product} />
                   <button
                     onClick={() => handleRemoveWishlist(product.id)}
-                    className="absolute top-2 right-2 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                    className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-background/90 shadow-sm backdrop-blur transition-opacity hover:bg-background sm:opacity-0 sm:group-hover:opacity-100"
                   >
                     <Trash2 className="h-4 w-4 text-destructive" />
                   </button>

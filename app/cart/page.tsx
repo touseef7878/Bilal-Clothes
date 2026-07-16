@@ -66,38 +66,38 @@ export default function CartPage() {
   }
 
   return (
-    <div className="container-narrow py-8 animate-fade-in">
-      <h1 className="font-display text-3xl font-bold mb-8">Shopping Cart</h1>
+    <div className="container-narrow py-6 sm:py-8 animate-fade-in">
+      <h1 className="page-heading mb-6 sm:mb-8">Shopping Cart</h1>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
-            <div key={item.variant_id} className="flex gap-4 border rounded-lg p-4">
-              <Link href={`/product/${item.slug}`} className="relative w-24 h-32 shrink-0 rounded-lg overflow-hidden bg-muted">
+            <div key={item.variant_id} className="flex gap-3 rounded-lg border p-3 sm:gap-4 sm:p-4">
+              <Link href={`/product/${item.slug}`} className="relative h-28 w-20 shrink-0 overflow-hidden rounded-lg bg-muted sm:h-32 sm:w-24">
                 {item.image_url && (
                   <Image src={item.image_url} alt={item.product_name} fill className="object-cover" sizes="96px" />
                 )}
               </Link>
-              <div className="flex-1 flex flex-col justify-between">
-                <div>
-                  <Link href={`/product/${item.slug}`} className="font-medium hover:text-primary transition-colors">
+              <div className="flex min-w-0 flex-1 flex-col justify-between">
+                <div className="min-w-0">
+                  <Link href={`/product/${item.slug}`} className="line-clamp-2 text-sm font-medium transition-colors hover:text-primary sm:text-base">
                     {item.product_name}
                   </Link>
                   <p className="text-sm text-muted-foreground mt-1">{item.variant_info}</p>
                   <p className="text-sm font-semibold mt-1">{formatPKR(item.price)}</p>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <div className="inline-flex items-center border rounded-md">
                     <button
                       onClick={() => updateQuantity(item.variant_id, Math.max(1, item.quantity - 1))}
-                      className="p-2 hover:bg-muted transition-colors"
+                      className="flex h-9 w-9 items-center justify-center hover:bg-muted transition-colors"
                     >
                       <Minus className="h-3.5 w-3.5" />
                     </button>
-                    <span className="px-4 py-1.5 text-sm font-medium min-w-[2.5rem] text-center">{item.quantity}</span>
+                    <span className="min-w-[2.25rem] px-2 py-1.5 text-center text-sm font-medium sm:min-w-[2.5rem] sm:px-4">{item.quantity}</span>
                     <button
                       onClick={() => updateQuantity(item.variant_id, Math.min(item.stock_qty, item.quantity + 1))}
-                      className="p-2 hover:bg-muted transition-colors"
+                      className="flex h-9 w-9 items-center justify-center hover:bg-muted transition-colors"
                       disabled={item.quantity >= item.stock_qty}
                     >
                       <Plus className="h-3.5 w-3.5" />
@@ -105,7 +105,7 @@ export default function CartPage() {
                   </div>
                   <button
                     onClick={() => removeItem(item.variant_id)}
-                    className="text-muted-foreground hover:text-destructive transition-colors p-2"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-destructive"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -117,7 +117,7 @@ export default function CartPage() {
 
         {/* Summary */}
         <div className="lg:col-span-1">
-          <div className="border rounded-lg p-6 sticky top-24 space-y-4">
+          <div className="space-y-4 rounded-lg border p-4 sm:p-6 lg:sticky lg:top-24">
             <h2 className="font-display text-xl font-bold">Order Summary</h2>
 
             {/* Promo Code */}
@@ -133,14 +133,14 @@ export default function CartPage() {
                   </button>
                 </div>
               ) : (
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Input
                     placeholder="Promo code"
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
                     className="flex-1"
                   />
-                  <Button onClick={handleApplyPromo} disabled={applying} variant="outline" size="sm">
+                  <Button onClick={handleApplyPromo} disabled={applying} variant="outline" size="sm" className="self-start sm:self-auto">
                     Apply
                   </Button>
                 </div>

@@ -39,7 +39,7 @@ export function HeroCarousel() {
   }, []);
 
   return (
-    <div className="relative h-[60vh] min-h-[400px] w-full overflow-hidden bg-muted">
+    <div className="relative h-[min(68vh,620px)] min-h-[420px] w-full overflow-hidden bg-muted sm:h-[60vh]">
       {slides.map((slide, i) => (
         <div
           key={i}
@@ -56,15 +56,15 @@ export function HeroCarousel() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
           <div className="absolute inset-0 flex items-center">
             <div className="container-narrow">
-              <div className="max-w-lg">
-                <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-4 text-balance animate-slide-up">
+              <div className="max-w-xl pb-8 sm:pb-0">
+                <h1 className="font-display mb-3 text-4xl font-bold leading-[1.05] text-white text-balance animate-slide-up sm:mb-4 sm:text-5xl md:text-6xl">
                   {slide.title}
                 </h1>
-                <p className="text-lg text-white/80 mb-8 animate-slide-up">
+                <p className="mb-6 max-w-md text-base leading-relaxed text-white animate-slide-up sm:mb-8 sm:text-lg">
                   {slide.subtitle}
                 </p>
                 <Link href={slide.href}>
-                  <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-foreground rounded-md font-semibold hover:bg-white/90 transition-all group">
+                  <button className="group inline-flex min-h-[48px] items-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-white/90 sm:px-8 sm:text-base">
                     {slide.cta}
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -75,7 +75,7 @@ export function HeroCarousel() {
         </div>
       ))}
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2 sm:bottom-6">
         {slides.map((_, i) => (
           <button
             key={i}

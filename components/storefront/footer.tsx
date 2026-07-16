@@ -27,10 +27,10 @@ export function Footer() {
   if (pathname?.startsWith('/admin')) return null;
 
   return (
-    <footer className="bg-primary text-primary-foreground mt-20">
-      <div className="container-narrow py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          <div className="col-span-2 lg:col-span-2">
+    <footer className="mt-12 bg-primary text-primary-foreground sm:mt-16 lg:mt-20">
+      <div className="container-narrow py-10 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-2">
             <h2 className="font-display text-3xl font-bold mb-3">Bilal Clothes</h2>
             <p className="text-sm text-primary-foreground/70 max-w-xs mb-6">
               Premium Pakistani fashion for men and women. Crafted with care, delivered with love across Pakistan.
@@ -60,7 +60,7 @@ export function Footer() {
             </div>
           ))}
 
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <h3 className="font-semibold text-sm mb-4 uppercase tracking-wider">Get in Touch</h3>
             <ul className="space-y-2.5 text-sm text-primary-foreground/70">
               <li className="flex items-center gap-2">
@@ -76,11 +76,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-primary-foreground/10 pt-6 text-center sm:mt-12 sm:flex-row sm:text-left">
           <p className="text-xs text-primary-foreground/50">
             © {new Date().getFullYear()} Bilal Clothes. All rights reserved.
           </p>
-          <div className="flex gap-4 text-xs text-primary-foreground/50">
+          <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-primary-foreground/50 sm:justify-end">
             <span>Cash on Delivery</span>
             <span>•</span>
             <span>JazzCash</span>

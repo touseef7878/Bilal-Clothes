@@ -58,8 +58,8 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="container-narrow py-12 max-w-md animate-fade-in">
-      <div className="border rounded-xl p-8">
+    <div className="container-narrow max-w-md py-8 sm:py-12 animate-fade-in">
+      <div className="rounded-xl border p-5 sm:p-8">
         <h1 className="font-display text-2xl font-bold text-center mb-2">
           {mode === 'login' ? 'Welcome Back' : 'Create Account'}
         </h1>

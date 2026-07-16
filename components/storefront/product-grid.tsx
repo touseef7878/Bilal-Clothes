@@ -180,11 +180,11 @@ export function ProductGrid({ products, categoryName }: { products: Product[]; c
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
+      <div className="mb-6 flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3">
           <Sheet open={showFilters} onOpenChange={setShowFilters}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="sm" className="lg:hidden">
+              <Button variant="outline" size="sm" className="min-h-[40px] lg:hidden">
                 <SlidersHorizontal className="h-4 w-4 mr-2" />
                 Filters
                 {activeFilterCount > 0 && (
@@ -194,20 +194,20 @@ export function ProductGrid({ products, categoryName }: { products: Product[]; c
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] overflow-y-auto">
+            <SheetContent side="left" className="w-[min(88vw,320px)] overflow-y-auto">
               <div className="pt-8">
                 <h2 className="font-display text-xl font-bold mb-6">Filters</h2>
                 <FilterContent />
               </div>
             </SheetContent>
           </Sheet>
-          <p className="text-sm text-muted-foreground">
+          <p className="truncate text-sm text-muted-foreground">
             {filtered.length} {filtered.length === 1 ? 'product' : 'products'}
           </p>
         </div>
 
         <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger className="w-[180px] h-9">
+          <SelectTrigger className="h-10 w-[132px] sm:w-[180px]">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
@@ -236,7 +236,7 @@ export function ProductGrid({ products, categoryName }: { products: Product[]; c
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6">
               {filtered.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

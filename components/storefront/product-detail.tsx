@@ -95,10 +95,10 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
   };
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+    <div className="grid gap-7 sm:gap-8 lg:grid-cols-2 lg:gap-12">
       {/* Image Gallery */}
       <div>
-        <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-muted mb-4 group">
+        <div className="group relative mb-3 aspect-[3/4] overflow-hidden rounded-xl bg-muted sm:mb-4">
           {images[selectedImage] ? (
             <>
               <Image
@@ -112,7 +112,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
               />
               <Dialog>
                 <DialogTrigger asChild>
-                  <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur transition-opacity sm:right-4 sm:top-4 sm:opacity-0 sm:group-hover:opacity-100">
                     <ZoomIn className="h-5 w-5" />
                   </button>
                 </DialogTrigger>
@@ -129,13 +129,13 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
             </div>
           )}
           {discountPct > 0 && (
-            <span className="absolute top-4 left-4 bg-destructive text-destructive-foreground text-sm font-bold px-3 py-1.5 rounded">
+            <span className="absolute left-3 top-3 rounded bg-destructive px-2 py-1 text-xs font-bold text-destructive-foreground sm:left-4 sm:top-4 sm:px-3 sm:py-1.5 sm:text-sm">
               -{discountPct}%
             </span>
           )}
         </div>
         {images.length > 1 && (
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+          <div className="scrollbar-hide flex gap-2 overflow-x-auto pb-1">
             {images.map((img: any, i: number) => (
               <button
                 key={img.id}
@@ -153,9 +153,9 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
 
       {/* Product Info */}
       <div>
-        <h1 className="font-display text-3xl md:text-4xl font-bold mb-3">{product.name}</h1>
+        <h1 className="font-display mb-3 text-3xl font-bold leading-tight sm:text-4xl">{product.name}</h1>
 
-        <div className="flex items-center gap-3 mb-4">
+        <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1">
           {avgRating > 0 && (
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -170,7 +170,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
           {product.sku && <span className="text-sm text-muted-foreground">SKU: {product.sku}</span>}
         </div>
 
-        <div className="flex items-center gap-3 mb-6">
+        <div className="mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 sm:mb-6">
           <span className="text-3xl font-bold">{formatPKR(effectivePrice)}</span>
           {discountPct > 0 && (
             <span className="text-lg text-muted-foreground line-through">{formatPKR(product.base_price)}</span>
@@ -182,7 +182,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
         {/* Size Selector */}
         {sizes.length > 0 && (
           <div className="mb-5">
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between gap-3">
               <span className="text-sm font-medium">Size</span>
               <button onClick={() => setShowSizeGuide(true)} className="text-sm text-primary hover:underline">
                 Size Guide
@@ -197,7 +197,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
                     key={size}
                     onClick={() => variant && setSelectedVariant(variant.id)}
                     disabled={!available}
-                    className={`px-4 py-2.5 rounded-md border-2 text-sm font-medium transition-all ${
+                    className={`min-h-[44px] rounded-md border-2 px-4 py-2.5 text-sm font-medium transition-all ${
                       selectedVariantData?.size === size
                         ? 'border-primary bg-primary/5 text-primary'
                         : available
@@ -226,7 +226,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
                     key={color}
                     onClick={() => variant && setSelectedVariant(variant.id)}
                     disabled={!available}
-                    className={`px-4 py-2.5 rounded-md border-2 text-sm font-medium transition-all ${
+                    className={`min-h-[44px] rounded-md border-2 px-4 py-2.5 text-sm font-medium transition-all ${
                       selectedVariantData?.color === color
                         ? 'border-primary bg-primary/5 text-primary'
                         : available
@@ -259,7 +259,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
           <div className="inline-flex items-center border rounded-md">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="p-3 hover:bg-muted transition-colors"
+              className="min-h-[44px] min-w-[44px] p-3 hover:bg-muted transition-colors"
               disabled={quantity <= 1}
             >
               <Minus className="h-4 w-4" />
@@ -267,7 +267,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
             <span className="px-6 py-2 font-medium min-w-[3rem] text-center">{quantity}</span>
             <button
               onClick={() => setQuantity(Math.min(stockQty, quantity + 1))}
-              className="p-3 hover:bg-muted transition-colors"
+              className="min-h-[44px] min-w-[44px] p-3 hover:bg-muted transition-colors"
               disabled={quantity >= stockQty}
             >
               <Plus className="h-4 w-4" />
@@ -277,7 +277,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
 
         {/* Action Buttons */}
         <div className="space-y-3 mb-6">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Button onClick={handleAddToCart} disabled={!inStock || adding} size="lg" variant="outline">
               <ShoppingBag className="h-4 w-4 mr-2" />
               {adding ? 'Adding...' : 'Add to Cart'}
@@ -297,7 +297,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
         </div>
 
         {/* Trust Badges */}
-        <div className="grid grid-cols-3 gap-3 py-4 border-y mb-6">
+        <div className="mb-6 grid grid-cols-3 gap-2 border-y py-4 sm:gap-3">
           {[
             { icon: Truck, label: 'Free delivery over Rs 5,000' },
             { icon: RefreshCw, label: '7-day easy returns' },
@@ -305,14 +305,14 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
           ].map((item) => (
             <div key={item.label} className="flex flex-col items-center text-center gap-1">
               <item.icon className="h-5 w-5 text-primary" />
-              <span className="text-xs text-muted-foreground">{item.label}</span>
+              <span className="text-[10px] leading-4 text-muted-foreground sm:text-xs">{item.label}</span>
             </div>
           ))}
         </div>
 
         {/* Tabs */}
         <Tabs defaultValue="details">
-          <TabsList className="w-full justify-start">
+          <TabsList className="scrollbar-hide w-full justify-start overflow-x-auto">
             <TabsTrigger value="details">Details</TabsTrigger>
             <TabsTrigger value="care">Care</TabsTrigger>
             <TabsTrigger value="delivery">Delivery</TabsTrigger>
@@ -362,7 +362,7 @@ export function ProductDetail({ product, reviews, avgRating }: ProductDetailProp
       {/* Size Guide Modal */}
       {showSizeGuide && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowSizeGuide(false)}>
-          <div className="bg-background rounded-xl p-6 max-w-md w-full mx-4 max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="mx-4 max-h-[80vh] w-full max-w-md overflow-y-auto rounded-xl bg-background p-4 sm:p-6" onClick={(e) => e.stopPropagation()}>
             <h2 className="font-display text-xl font-bold mb-4">Size Guide</h2>
             <table className="w-full text-sm">
               <thead>

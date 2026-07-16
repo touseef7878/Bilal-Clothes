@@ -74,7 +74,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
   return (
     <Link href={`/product/${product.slug}`} className="group block">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted mb-3">
+      <div className="relative mb-2 aspect-[3/4] overflow-hidden rounded-lg bg-muted sm:mb-3">
         {image && !imgError ? (
           <Image
             src={image.url}
@@ -91,23 +91,23 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           </div>
         )}
         {discountPct > 0 && (
-          <span className="absolute top-3 left-3 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-1 rounded">
+          <span className="absolute left-2 top-2 rounded bg-destructive px-1.5 py-1 text-[10px] font-bold text-destructive-foreground sm:left-3 sm:top-3 sm:px-2 sm:text-xs">
             -{discountPct}%
           </span>
         )}
         {outOfStock && (
-          <span className="absolute top-3 right-3 bg-foreground/80 text-background text-xs font-bold px-2 py-1 rounded">
+          <span className="absolute left-2 top-2 rounded bg-foreground/80 px-1.5 py-1 text-[10px] font-bold text-background sm:left-3 sm:top-3 sm:px-2 sm:text-xs">
             Out of Stock
           </span>
         )}
         <button
           onClick={handleWishlist}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-background"
+          className="absolute bottom-2 right-2 flex h-9 w-9 items-center justify-center rounded-full bg-background/90 shadow-sm backdrop-blur transition-all hover:bg-background sm:right-3 sm:top-3 sm:bottom-auto sm:opacity-0 sm:group-hover:opacity-100"
           aria-label="Add to wishlist"
         >
           <Heart className={`h-4 w-4 ${wishlisted ? 'fill-destructive text-destructive' : ''}`} />
         </button>
-        <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+        <div className="absolute inset-x-0 bottom-0 hidden p-3 opacity-0 transition-opacity translate-y-2 duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:block">
           <Button
             onClick={handleAddToCart}
             disabled={outOfStock || adding}
@@ -119,13 +119,13 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         </div>
       </div>
       <div>
-        <h3 className="text-sm font-medium text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+        <h3 className="line-clamp-1 text-xs font-medium text-foreground transition-colors group-hover:text-primary sm:text-sm">
           {product.name}
         </h3>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="text-sm font-semibold text-foreground">{formatPKR(effectivePrice)}</span>
+        <div className="mt-1 flex items-center gap-1.5 sm:gap-2">
+          <span className="text-xs font-semibold text-foreground sm:text-sm">{formatPKR(effectivePrice)}</span>
           {discountPct > 0 && (
-            <span className="text-xs text-muted-foreground line-through">{formatPKR(product.base_price)}</span>
+            <span className="text-[10px] text-muted-foreground line-through sm:text-xs">{formatPKR(product.base_price)}</span>
           )}
         </div>
       </div>

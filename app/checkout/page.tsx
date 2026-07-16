@@ -143,11 +143,11 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="container-narrow py-8 animate-fade-in">
-      <h1 className="font-display text-3xl font-bold mb-8">Checkout</h1>
+    <div className="container-narrow py-6 sm:py-8 animate-fade-in">
+      <h1 className="page-heading mb-6 sm:mb-8">Checkout</h1>
 
       {/* Progress */}
-      <div className="flex items-center justify-between mb-8 max-w-2xl mx-auto">
+      <div className="mb-8 flex items-center justify-between sm:mx-auto sm:max-w-2xl">
         {STEPS.map((label, i) => (
           <div key={label} className="flex items-center flex-1 last:flex-none">
             <div className="flex flex-col items-center">
@@ -158,16 +158,16 @@ export default function CheckoutPage() {
               }`}>
                 {i < step ? <Check className="h-5 w-5" /> : <span className="text-sm font-semibold">{i + 1}</span>}
               </div>
-              <span className={`text-xs mt-1 ${i <= step ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>{label}</span>
+              <span className={`mt-1 text-[10px] sm:text-xs ${i <= step ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>{label}</span>
             </div>
             {i < STEPS.length - 1 && (
-              <div className={`flex-1 h-0.5 mx-2 -mt-5 ${i < step ? 'bg-primary' : 'bg-border'}`} />
+              <div className={`mx-1 -mt-5 h-0.5 flex-1 sm:mx-2 ${i < step ? 'bg-primary' : 'bg-border'}`} />
             )}
           </div>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
         <div className="lg:col-span-2">
           {error && (
             <div className="bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-md px-4 py-3 mb-4">
@@ -393,7 +393,7 @@ export default function CheckoutPage() {
           )}
 
           {/* Navigation */}
-          <div className="flex justify-between mt-6">
+          <div className="mt-6 flex justify-between gap-3">
             <Button variant="outline" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}>
               <ChevronLeft className="h-4 w-4 mr-1" /> Back
             </Button>
@@ -411,7 +411,7 @@ export default function CheckoutPage() {
 
         {/* Summary */}
         <div>
-          <div className="border rounded-lg p-6 sticky top-24 space-y-3">
+          <div className="space-y-3 rounded-lg border p-4 sm:p-6 lg:sticky lg:top-24">
             <h2 className="font-display text-lg font-bold">Order Summary</h2>
             <div className="space-y-2 text-sm border-t pt-3">
               {items.map((item) => (

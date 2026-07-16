@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag, Search, User, Heart } from 'lucide-react';
+import { Menu, X, ShoppingBag, User, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart-context';
 import { cn } from '@/lib/utils';
@@ -46,17 +46,17 @@ export function Header() {
         )}
       >
         <div className="container-narrow">
-          <div className="flex h-16 items-center justify-between gap-4">
+          <div className="flex h-14 items-center justify-between gap-2 sm:h-16 sm:gap-4">
             <button
-              className="lg:hidden p-2 -ml-2"
+              className="lg:hidden -ml-2 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            <Link href="/" className="flex items-center gap-2 shrink-0">
-              <span className="font-display text-2xl font-bold tracking-tight text-primary">
+            <Link href="/" className="flex min-w-0 items-center gap-2 shrink-0">
+              <span className="font-display truncate text-xl font-bold tracking-tight text-primary sm:text-2xl">
                 Bilal Clothes
               </span>
             </Link>
@@ -77,7 +77,7 @@ export function Header() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-1 sm:gap-2">
+            <div className="flex shrink-0 items-center gap-0.5 sm:gap-2">
               <Link href="/account" className="hidden sm:block">
                 <Button variant="ghost" size="icon" aria-label="Account">
                   <User className="h-5 w-5" />
@@ -89,7 +89,7 @@ export function Header() {
                 </Button>
               </Link>
               <Link href="/cart">
-                <Button variant="ghost" size="icon" className="relative" aria-label="Cart">
+                <Button variant="ghost" size="icon" className="relative min-h-[44px] min-w-[44px]" aria-label="Cart">
                   <ShoppingBag className="h-5 w-5" />
                   {itemCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 min-w-5 flex items-center justify-center px-1 animate-scale-in">
@@ -110,7 +110,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'px-3 py-2.5 rounded-md text-sm font-medium transition-colors hover:bg-muted',
+                    'min-h-[44px] rounded-md px-3 py-2.5 text-sm font-medium transition-colors hover:bg-muted',
                     pathname === link.href ? 'text-primary bg-muted' : 'text-foreground'
                   )}
                 >
