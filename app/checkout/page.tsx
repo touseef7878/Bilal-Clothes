@@ -366,9 +366,11 @@ export default function CheckoutPage() {
                 <div className="bg-muted/50 rounded-lg p-4 space-y-3 animate-fade-in">
                   <div>
                     <p className="text-sm font-medium mb-1">Bank Account Details:</p>
-                    <p className="text-sm text-muted-foreground">Bank: HBL • Account Title: Bilal Clothes Pvt Ltd</p>
-                    <p className="text-sm text-muted-foreground">Account #: 0011-2345678-001</p>
-                    <p className="text-sm text-muted-foreground">IBAN: PK36 HABB 0011 2345 6780 01</p>
+                    <p className="text-sm text-muted-foreground">Bank: HBL • Account Title: Bilal Clothes</p>
+                    <p className="text-sm text-muted-foreground">Account #: Please contact us on WhatsApp for details</p>
+                    <p className="text-sm font-medium mt-2">
+                      WhatsApp: <a href="https://wa.me/923101533429" className="text-primary underline">+92 310 1533429</a>
+                    </p>
                   </div>
                   <div>
                     <Label htmlFor="proof" className="text-sm">Upload Payment Proof</Label>

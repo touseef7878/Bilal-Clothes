@@ -3,19 +3,10 @@ import { ProductCard } from '@/components/storefront/product-card';
 import { HeroCarousel } from '@/components/storefront/hero-carousel';
 import Link from 'next/link';
 import { ArrowRight, Truck, RefreshCw, ShieldCheck, MessageCircle } from 'lucide-react';
-import { isDemoMode, getDemoFeatured, getDemoBestsellers, DEMO_CATEGORIES } from '@/lib/demo-data';
 
 export const revalidate = 60;
 
 async function getHomepageData() {
-  if (isDemoMode()) {
-    return {
-      categories: DEMO_CATEGORIES,
-      featured: getDemoFeatured(),
-      bestsellers: getDemoBestsellers(),
-    };
-  }
-
   const [categories, featured, bestsellers] = await Promise.all([
     supabase
       .from('categories')
@@ -24,22 +15,14 @@ async function getHomepageData() {
       .order('sort_order'),
     supabase
       .from('products')
-      .select(`
-        *,
-        product_images (url, sort_order),
-        product_variants (id, size, color, stock_qty, price_override)
-      `)
+      .select(`*, product_images (url, sort_order), product_variants (id, size, color, stock_qty, price_override)`)
       .eq('status', 'active')
       .eq('is_featured', true)
       .order('sort_order')
       .limit(8),
     supabase
       .from('products')
-      .select(`
-        *,
-        product_images (url, sort_order),
-        product_variants (id, size, color, stock_qty, price_override)
-      `)
+      .select(`*, product_images (url, sort_order), product_variants (id, size, color, stock_qty, price_override)`)
       .eq('status', 'active')
       .eq('is_bestseller', true)
       .order('sort_order')
@@ -92,11 +75,16 @@ export default async function Home() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
           {categories.map((cat) => (
-            <Link key={cat.id} href={`/${cat.slug}`} className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted sm:aspect-[16/9]">
+            <Link
+              key={cat.id}
+              href={`/${cat.slug}`}
+              className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted sm:aspect-[16/9]"
+            >
               <img
-                src={cat.gender === 'men'
-                  ? 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800'
-                  : 'https://images.pexels.com/photos/2703202/pexels-photo-2703202.jpeg?auto=compress&cs=tinysrgb&w=800'
+                src={
+                  cat.gender === 'men'
+                    ? 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800'
+                    : 'https://images.pexels.com/photos/2703202/pexels-photo-2703202.jpeg?auto=compress&cs=tinysrgb&w=800'
                 }
                 alt={cat.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
