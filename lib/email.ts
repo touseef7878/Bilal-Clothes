@@ -250,7 +250,7 @@ export async function sendAdminOrderAlert(data: OrderEmailData): Promise<void> {
     </div>
 
     <div style="text-align:center;">
-      <a href="https://nfvkvczghgmkvlykbvog.supabase.co"
+      <a href="https://bilalclothes.vercel.app/admin/orders"
          style="display:inline-block;padding:12px 28px;background:#1a1a1a;color:#ffffff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;">
         View in Admin Panel
       </a>
@@ -338,7 +338,7 @@ export async function sendWeeklyOwnerSummary(data: WeeklySummaryData): Promise<v
     <div style="text-align:center;">
       <a href="https://bilalclothes.vercel.app/admin"
          style="display:inline-block;padding:12px 28px;background:#1a1a1a;color:#ffffff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;">
-        Open Admin Panel
+        Open Admin Panel → bilalclothes.vercel.app/admin
       </a>
     </div>`;
 
