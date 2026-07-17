@@ -123,6 +123,40 @@ export default function CheckoutPage() {
         await supabase.rpc('increment_promo_usage', { promo_code: promoCode });
       }
 
+      // Send order confirmation email (fire-and-forget — don't block redirect)
+      fetch('/api/send-order-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: order.id,
+          customerName: shipping.name,
+          customerEmail: shipping.email || null,
+          items: items.map((item) => ({
+            product_name: item.product_name,
+            variant_info: item.variant_info,
+            quantity: item.quantity,
+            price_at_purchase: item.price,
+          })),
+          subtotal,
+          discountAmount: promoDiscount,
+          shippingFee: shippingFee + codFee,
+          total,
+          paymentMethod,
+          promoCode: promoCode || null,
+          shippingAddress: {
+            name: shipping.name,
+            phone: normalizePhone(shipping.phone),
+            address: shipping.address,
+            city: shipping.city,
+            province: shipping.province,
+            area: shipping.area || null,
+          },
+        }),
+      }).catch(() => {
+        // Email failure never blocks the order
+        console.warn('Order email could not be sent');
+      });
+
       await clearCart();
 
       router.push(`/order-confirmation?id=${order.id}`);

@@ -16,7 +16,7 @@ export type Database = {
       name: string;
       email: string | null;
       phone: string | null;
-      role: 'customer' | 'admin' | 'staff';
+      role: 'customer' | 'admin';
       is_flagged: boolean;
       flag_reason: string | null;
       created_at: string;
@@ -27,14 +27,45 @@ export type Database = {
       name?: string;
       email?: string | null;
       phone?: string | null;
-      role?: 'customer' | 'admin' | 'staff';
+      role?: 'customer' | 'admin';
     };
     Update: {
       name?: string;
       phone?: string | null;
-      role?: 'customer' | 'admin' | 'staff';
+      role?: 'customer' | 'admin';
       is_flagged?: boolean;
       flag_reason?: string | null;
+    };
+  };
+  admin_users: {
+    Row: {
+      id: string;
+      user_id: string;
+      role: 'owner' | 'operator' | 'staff';
+      created_at: string;
+    };
+    Insert: {
+      user_id: string;
+      role: 'owner' | 'operator' | 'staff';
+    };
+    Update: {
+      role?: 'owner' | 'operator' | 'staff';
+    };
+  };
+  activity_log: {
+    Row: {
+      id: string;
+      admin_id: string | null;
+      action: string;
+      order_id: string | null;
+      details: Record<string, unknown>;
+      created_at: string;
+    };
+    Insert: {
+      admin_id?: string | null;
+      action: string;
+      order_id?: string | null;
+      details?: Record<string, unknown>;
     };
   };
   addresses: {

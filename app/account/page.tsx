@@ -108,9 +108,18 @@ export default function AccountPage() {
           <h1 className="page-heading">My Account</h1>
           <p className="truncate text-sm text-muted-foreground sm:text-base">{user?.email}</p>
         </div>
-        <Button variant="outline" onClick={handleSignOut}>
-          <LogOut className="h-4 w-4 mr-2" /> Sign Out
-        </Button>
+        <div className="flex items-center gap-2">
+          {profile?.role === 'admin' && (
+            <Link href="/admin">
+              <Button variant="outline" size="sm">
+                Admin Panel →
+              </Button>
+            </Link>
+          )}
+          <Button variant="outline" onClick={handleSignOut}>
+            <LogOut className="h-4 w-4 mr-2" /> Sign Out
+          </Button>
+        </div>
       </div>
 
       <Tabs defaultValue={initialTab}>
